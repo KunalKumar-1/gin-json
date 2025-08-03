@@ -26,6 +26,8 @@ go.work.sum
 
 # env file
 .env
+/main
+/json-gin
 
 #dist
 dist/
