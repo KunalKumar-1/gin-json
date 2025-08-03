@@ -82,3 +82,15 @@ func PostsUpdate(ctx *gin.Context) {
 		"updatedPost": post,
 	})
 }
+
+func PostsDelete(ctx *gin.Context) {
+	id := ctx.Param("id")
+
+	initializers.DB.Delete(&models.Post{}, id)
+
+	// resp
+
+	ctx.JSON(200, gin.H{
+		"message": id + " Post Deletesd Successfully",
+	})
+}
