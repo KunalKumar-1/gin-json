@@ -26,7 +26,7 @@ jobs:
         run: |
           fmt_output=$(gofmt -l .)
           if [ -n "$fmt_output" ]; then
-            echo "Files not properly formatted:"
+            echo " Files not properly formatted:"
             echo "$fmt_output"
             exit 1
           fi
@@ -36,3 +36,19 @@ jobs:
 
       - name: Build
         run: go build ./...
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    name: GitGuardian Secret Scan
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install ggshield
+        run: pip install ggshield
+
+      - name: Run GitGuardian secret scan
+        env:
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+        run: ggshield secret scan repo .
