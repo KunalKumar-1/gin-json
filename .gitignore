@@ -12,6 +12,8 @@
 *.test
 
 # Code coverage profiles and other test artifacts
+/json-gin
+/main
 *.out
 coverage.*
 *.coverprofile
@@ -26,8 +28,6 @@ go.work.sum
 
 # env file
 .env
-/main
-/json-gin
 
 #dist
 dist/

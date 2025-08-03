@@ -10,11 +10,10 @@ func PostsCreate(ctx *gin.Context) {
 	// get data form the request body
 	var body struct {
 		Title string
-		Body string
+		Body  string
 	}
 
 	ctx.Bind(&body)
-
 
 	// create the post
 	post := models.Post{Title: body.Title, Body: body.Body}
@@ -27,5 +26,17 @@ func PostsCreate(ctx *gin.Context) {
 	// return
 	ctx.JSON(200, gin.H{
 		"message": post,
+	})
+}
+
+func PostsIndex(ctx *gin.Context) {
+	// get the posts
+	var posts []models.Post
+	initializers.DB.Find(&posts)
+
+	
+	// return the posts
+	ctx.JSON(200, gin.H{
+		"posts": posts,
 	})
 }
